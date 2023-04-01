@@ -1,0 +1,22 @@
+#!/bin/sh
+# script/test: Run test suite for application.
+
+set -e
+cd "$(dirname "$0")/.."
+
+[ -z "$DEBUUG" ] || set -x
+
+echo "=====> Building app..."
+yarn build
+
+echo "=====> Creating database..."
+yarn db:create
+
+echo "=====> Running migrations..."
+yarn db:migrate
+
+echo "=====> Running seeders..."
+yarn db:seed
+
+echo "=====> Starting app..."
+node dist/http/server.js

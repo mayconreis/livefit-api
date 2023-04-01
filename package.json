@@ -1,0 +1,69 @@
+{
+  "name": "livefit-api",
+  "description": "API do sistema livefit",
+  "version": "1.0.0",
+  "main": "server.ts",
+  "scripts": {
+    "build": "tsc && tsc-alias",
+    "start": "scripts/start",
+    "dev": "nodemon",
+    "db:create": "npx sequelize-cli db:create",
+    "db:migrate": "npx sequelize-cli db:migrate",
+    "migration:generate": "npx sequelize-cli migration:generate",
+    "db:migrate:undo": "npx sequelize-cli db:migrate:undo",
+    "db:migrate:undo:all": "npx sequelize-cli db:migrate:undo:all",
+    "db:seed": "npx sequelize-cli db:seed:all",
+    "db:seed:undo": "npx sequelize-cli db:seed:undo",
+    "db:seed:undo:all": "npx sequelize-cli db:seed:undo:all",
+    "lint": "eslint . --ext .ts,.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mayconreis/livefit-api.git"
+  },
+  "author": "Maycon Jesus <maycon.jesus@aluno.faculdadeimpacta.com.br>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mayconreis/livefit-api/issues"
+  },
+  "homepage": "https://github.com/mayconreis/livefit-api#readme",
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@typescript-eslint/parser": "^5.57.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.4",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^4.2.1",
+    "module-alias": "^2.2.2",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.7",
+    "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.5",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "http-status": "^1.6.2",
+    "joi": "^17.9.1",
+    "jsonwebtoken": "^9.0.0",
+    "mysql2": "^3.2.0",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.30.0",
+    "sequelize-typescript": "^2.1.5",
+    "winston": "^3.8.2"
+  },
+  "_moduleAliases": {
+    "@src": "src"
+  }
+}
