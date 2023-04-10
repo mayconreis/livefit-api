@@ -1,19 +1,8 @@
 import jwt from 'jsonwebtoken';
 import environment from '@src/config/environment';
+import { IJWTHelper, ITokenAttributes } from '@src/interfaces';
 
 const { security } = environment;
-
-export interface ITokenAttributes {
-  username: string;
-}
-
-export interface IJWTHelper {
-  sign(username: string, personalKey: string): string;
-
-  verify(token: string, personalKey: string): ITokenAttributes;
-
-  decodePayload(token: string): ITokenAttributes;
-}
 
 class JWTHelper implements IJWTHelper {
   private jwt: typeof jwt;
@@ -25,10 +14,10 @@ class JWTHelper implements IJWTHelper {
     this.secretKey = String(security.secretKey);
   }
 
-  sign(username: string, personalKey: string): string {
+  sign(attributes: ITokenAttributes, personalKey: string): string {
     return this.jwt.sign(
       {
-        username,
+        ...attributes,
       },
       this.createSecreteString(personalKey),
       { expiresIn: security.expiresToken }

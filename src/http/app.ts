@@ -40,7 +40,7 @@ export default class App {
         this.app.use(express.json());
 
         this.app.use('/health', healthRoutes);
-        this.app.use('/api/v1', routersV1);
+        this.app.use('/api', routersV1);
 
         this.app.use(errorHandler);
 

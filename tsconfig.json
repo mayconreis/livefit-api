@@ -1,35 +1,37 @@
 {
-    "compilerOptions": {
-        "target": "es2016",
-        "lib": [
-            "ES6"
-        ],
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "baseUrl": "./",
-        "paths": {
-            "@src/*": [
-                "src/*"
-            ]
-        },
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "sourceMap": true,
-        "outDir": "dist",
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "noImplicitAny": true,
-        "skipLibCheck": true,
-        "typeRoots": [
-            "./node_modules/@types"
-        ]
-    },
-    "include": [
-        "src/**/*"
+  "compilerOptions": {
+    "target": "es2016",
+    "lib": [
+      "ES6"
     ],
-    "exclude": [
-        "node_modules",
-        "dist"
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@src/*": [
+        "src/*"
+      ]
+    },
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "@types"
     ]
+  },
+  "include": [
+    "src/**/*",
+    "@types"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
