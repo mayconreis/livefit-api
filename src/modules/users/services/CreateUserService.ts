@@ -24,7 +24,7 @@ export default class CreateUserService extends Service implements ICreateUserSer
   }
 
   async execute(body: ICreateUserDto): Promise<IUserResponse> {
-    const { fullName, password, email } = body;
+    const { fullName, password, email, profile } = body;
 
     let userAlreadyExists: boolean;
     try {
@@ -50,6 +50,7 @@ export default class CreateUserService extends Service implements ICreateUserSer
           {
             fullName,
             email,
+            profile,
             password: hashedPassword,
             personalKey,
           } as Users,

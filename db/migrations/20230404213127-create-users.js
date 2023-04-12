@@ -19,6 +19,10 @@ module.exports = {
         type: DataType.STRING(100),
         allowNull: false,
       },
+      profile: {
+        type: DataType.STRING,
+        allowNull: false,
+      },
       password: {
         type: DataType.STRING(),
         allowNull: false,

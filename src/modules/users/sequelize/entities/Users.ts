@@ -1,9 +1,11 @@
 import { BaseEntity, IBaseEntityAttributes } from '@src/common/BaseEntity';
 import { Column, DataType, Table } from 'sequelize-typescript';
+import { EUserProfile } from '@src/shared/enums';
 
 export interface IUserAttributes extends IBaseEntityAttributes {
   fullName: string;
   email: string;
+  profile: EUserProfile;
   password: string;
   personalKey: string;
   createdAt?: Date;
@@ -23,6 +25,9 @@ export class Users extends BaseEntity<IUserAttributes, IUserCreationAttributes> 
 
   @Column(DataType.STRING(100))
   email!: string;
+
+  @Column(DataType.STRING)
+  profile!: EUserProfile;
 
   @Column(DataType.STRING)
   password!: string;
