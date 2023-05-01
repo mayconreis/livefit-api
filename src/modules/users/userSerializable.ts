@@ -3,9 +3,11 @@ import { IUserResponse } from './interfaces';
 
 export const userSerializable = (user: Users): IUserResponse =>
   <IUserResponse>{
+    id: user.id,
     fullName: user.fullName,
     email: user.email,
     profile: user.profile,
+    nutritionistId: user.nutritionistId,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
   };
