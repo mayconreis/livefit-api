@@ -3,4 +3,6 @@ export interface IRoutineResponse {
   patientId: number;
   nutritionistId: number;
   meals: object;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
