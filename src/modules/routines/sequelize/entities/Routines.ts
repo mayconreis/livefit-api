@@ -6,6 +6,8 @@ export interface IRoutineAttributes extends IBaseEntityAttributes {
   patientId: number;
   nutritionistId: number;
   meals: Meals[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export type IRoutineCreationAttributes = Omit<IRoutineAttributes, 'id'>;
@@ -24,4 +26,10 @@ export class Routines extends BaseEntity<IRoutineAttributes, IRoutineCreationAtt
 
   @HasMany(() => Meals)
   meals!: Meals[];
+
+  @Column(DataType.DATE)
+  createdAt?: Date;
+
+  @Column(DataType.DATE)
+  updatedAt?: Date;
 }

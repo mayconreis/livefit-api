@@ -7,6 +7,8 @@ export const routineSerializable = (routine: Routines): IRoutineResponse =>
     patientId: routine.patientId,
     nutritionistId: routine.nutritionistId,
     meals: routine.meals,
+    createdAt: routine.createdAt,
+    updatedAt: routine.updatedAt,
   };
 
 export const routinesSerializable = (routines: Routines[]): IRoutineResponse[] =>
