@@ -1,7 +1,5 @@
-import { EStatus } from '@src/shared/enums';
-
 export interface ISearchFilter {
-  status?: EStatus;
+  id?: number;
   createdAt?: Date;
   updatedAt?: Date;
 }

@@ -13,8 +13,24 @@ export const createUserSchema = joi.object().keys({
   profile: joi
     .string()
     .trim()
+    .required()
     .valid(...Object.values(EUserProfile))
     .messages({ 'any.only': '{#label} deve estar entre as opções {#valids}' }),
   password: joi.string().min(8).max(250).required(),
   confirmPassword: joi.valid(joi.ref('password')).required().messages({ 'any.only': 'As senhas devem ser iguais' }),
+});
+
+export const updateUserSchema = joi.object().keys({
+  fullName: joi
+    .string()
+    .min(3)
+    .max(250)
+    .trim()
+    .regex(/^[a-zA-Z ]+$/, 'name'),
+  profile: joi
+    .string()
+    .trim()
+    .valid(...Object.values(EUserProfile))
+    .messages({ 'any.only': '{#label} deve estar entre as opções {#valids}' }),
+  nutritionistId: joi.number().integer(),
 });

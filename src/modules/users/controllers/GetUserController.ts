@@ -1,10 +1,9 @@
 import { Controller, IController } from '@src/common';
 import { NextFunction, Request, Response } from 'express';
-import environment from '@src/config/environment';
 import { OK } from 'http-status';
 import { IGetUserService } from '../interfaces';
 
-export default class GetProfileController extends Controller implements IController {
+export default class GetUserController extends Controller implements IController {
   private service: IGetUserService;
 
   constructor(service: IGetUserService) {
@@ -13,9 +12,9 @@ export default class GetProfileController extends Controller implements IControl
   }
 
   async handle(req: Request, res: Response, next: NextFunction): Promise<void> {
-    const userId = Number(req.userId);
+    const userId = Number(req.params.id);
     try {
-      const user = await this.handleWithTimeout(this.service.execute({ id: userId }), environment.api.requestTimeout);
+      const user = await this.handleWithTimeout(this.service.execute({ id: userId }));
       this.render(res, user, OK);
     } catch (err) {
       next(err);

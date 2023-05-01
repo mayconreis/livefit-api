@@ -6,6 +6,7 @@ export interface IUserAttributes extends IBaseEntityAttributes {
   fullName: string;
   email: string;
   profile: EUserProfile;
+  nutritionistId: number;
   password: string;
   personalKey: string;
   createdAt?: Date;
@@ -28,6 +29,9 @@ export class Users extends BaseEntity<IUserAttributes, IUserCreationAttributes> 
 
   @Column(DataType.STRING)
   profile!: EUserProfile;
+
+  @Column(DataType.INTEGER)
+  nutritionistId!: number;
 
   @Column(DataType.STRING)
   password!: string;

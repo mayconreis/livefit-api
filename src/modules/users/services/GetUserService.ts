@@ -1,9 +1,11 @@
 import { InternalError, ResponseError, Service } from '@src/common';
 import { ErrorHelper } from '@src/helpers';
 import { NOT_FOUND } from 'http-status';
+import { FindOptions } from 'sequelize';
 import { IUserRepository, Users } from '../sequelize';
 import { userSerializable } from '../userSerializable';
-import { IGetUserService, IUserResponse } from '../interfaces';
+import { IGetUserService, IUserFilter, IUserResponse } from '../interfaces';
+import { profile } from 'winston';
 
 export default class GetUserService extends Service implements IGetUserService {
   private userRepository: IUserRepository;
@@ -13,11 +15,22 @@ export default class GetUserService extends Service implements IGetUserService {
     this.userRepository = userRepository;
   }
 
-  async execute(userId: number): Promise<IUserResponse> {
+  async execute(filter: IUserFilter): Promise<IUserResponse> {
+    const filters = this.buildFilter(filter);
+
+    const conditions: FindOptions = {};
+    conditions.where = {
+      ...filters,
+    };
+
+    if (filter?.profile) {
+      conditions.where.profile = filter.profile;
+    }
+
     let user: Users | null;
 
     try {
-      user = await this.userRepository.findOne({ where: { id: userId } });
+      user = await this.userRepository.findOne(conditions);
     } catch (err) {
       const error = ErrorHelper.ensureError(err);
       throw new InternalError('Unable to find record into database', error);

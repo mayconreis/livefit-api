@@ -1,6 +1,5 @@
 import { IModelAssociations, ISearchFilter } from '@src/interfaces';
 import { FindOptions, Includeable, Op } from 'sequelize';
-import { StringHelper } from '@src/helpers';
 
 export interface IService {
   execute(...args: any): Promise<any>;
@@ -9,13 +8,13 @@ export interface IService {
 export abstract class Service implements IService {
   abstract execute(...args: any): Promise<any>;
 
-  protected buildFilter({ status, createdAt, updatedAt }: ISearchFilter): FindOptions {
+  protected buildFilter({ id, createdAt, updatedAt }: ISearchFilter): FindOptions {
     const conditions: FindOptions = {};
 
     conditions.where = {};
 
-    if (status) {
-      conditions.where.status = StringHelper.toUpper(status);
+    if (id) {
+      conditions.where.id = id;
     }
 
     if (createdAt) {
@@ -30,7 +29,7 @@ export abstract class Service implements IService {
       };
     }
 
-    return conditions;
+    return conditions.where;
   }
 
   protected buildIncludes(includes: string, modelAssociations: IModelAssociations): FindOptions {
