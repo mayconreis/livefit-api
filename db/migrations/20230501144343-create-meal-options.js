@@ -14,6 +14,8 @@ module.exports = {
       meal_id: {
         type: DataType.INTEGER(),
         references: { model: 'meals', key: 'id' },
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
       },
     });
   },

@@ -1,8 +1,8 @@
-import { MealOptions } from './MealOptions';
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Table } from 'sequelize-typescript';
 import { BaseEntity, IBaseEntityAttributes } from '@src/common/BaseEntity';
-import { Routines } from './Routines';
 import { EMealPeriod } from '@src/shared/enums';
+import { Routines } from './Routines';
+import { MealOptions } from './MealOptions';
 
 export interface IMealsAttributes extends IBaseEntityAttributes {
   time: string;
@@ -23,7 +23,7 @@ export class Meals extends BaseEntity<IMealsAttributes, IMealsCreationAttributes
   @Column(DataType.TIME)
   time!: string;
 
-  @HasMany(() => MealOptions)
+  @HasMany(() => MealOptions, { onDelete: 'cascade', onUpdate: 'cascade' })
   options!: MealOptions[];
 
   @Column(DataType.STRING)
@@ -32,6 +32,6 @@ export class Meals extends BaseEntity<IMealsAttributes, IMealsCreationAttributes
   @ForeignKey(() => Routines)
   routineId!: number;
 
-  @BelongsTo(() => Routines)
+  @BelongsTo(() => Routines, { onDelete: 'cascade', onUpdate: 'cascade' })
   routine!: Routines;
 }
