@@ -22,6 +22,8 @@ module.exports = {
       routine_id: {
         type: DataType.INTEGER(),
         references: { model: 'routines', key: 'id' },
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
       },
     });
   },

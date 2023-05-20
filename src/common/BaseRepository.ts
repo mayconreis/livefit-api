@@ -19,7 +19,6 @@ export default abstract class BaseRepository<M extends Model> implements IBaseRe
 
     Logger.Debug(`Response Query Delete`, {
       model: this.model,
-      conditions,
       response,
     });
 

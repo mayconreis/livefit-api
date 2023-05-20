@@ -9,3 +9,4 @@ export * from './ICreateMealItemDto';
 export * from './IGetRoutinesService';
 export * from './ICreateRoutineService';
 export * from './IGetRoutineService';
+export * from './IDeleteRoutineService';

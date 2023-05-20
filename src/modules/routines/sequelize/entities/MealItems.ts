@@ -26,6 +26,6 @@ export class MealItems extends BaseEntity<IMealItemsAttributes, IMealItemsCreati
   @ForeignKey(() => MealOptions)
   mealOptionId!: number;
 
-  @BelongsTo(() => MealOptions)
+  @BelongsTo(() => MealOptions, { onDelete: 'cascade', onUpdate: 'cascade' })
   mealOptions!: MealOptions;
 }

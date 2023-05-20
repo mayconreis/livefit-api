@@ -17,12 +17,12 @@ export type IMealOptionsCreationAttributes = Omit<IMealOptionsAttributes, 'id'>;
   underscored: true,
 })
 export class MealOptions extends BaseEntity<IMealOptionsAttributes, IMealOptionsCreationAttributes> {
-  @HasMany(() => MealItems)
+  @HasMany(() => MealItems, { onDelete: 'cascade', onUpdate: 'cascade' })
   items!: MealItems[];
 
   @ForeignKey(() => Meals)
   mealId!: number;
 
-  @BelongsTo(() => Meals)
+  @BelongsTo(() => Meals, { onDelete: 'cascade', onUpdate: 'cascade' })
   meal!: Meals;
 }

@@ -22,6 +22,8 @@ module.exports = {
       meal_option_id: {
         type: DataType.INTEGER(),
         references: { model: 'meal_options', key: 'id' },
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
       },
     });
   },

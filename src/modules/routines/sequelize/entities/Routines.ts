@@ -24,7 +24,7 @@ export class Routines extends BaseEntity<IRoutineAttributes, IRoutineCreationAtt
   @Column(DataType.INTEGER)
   nutritionistId!: number;
 
-  @HasMany(() => Meals)
+  @HasMany(() => Meals, { onDelete: 'cascade', onUpdate: 'cascade' })
   meals!: Meals[];
 
   @Column(DataType.DATE)

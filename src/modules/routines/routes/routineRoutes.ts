@@ -4,13 +4,14 @@ import {
   GetRoutineByPatientController,
   GetRoutineController,
   GetRoutinesController,
+  DeleteRoutineController,
 } from '@src/modules/routines/controllers';
 import validateSchema from '@src/http/middlewares/joi/validateSchema';
 import createRoutineSchema from '@src/modules/routines/routineSchema';
 import { ESchemaType } from '@src/shared/enums';
 import { UserRepository } from '@src/modules/users/sequelize';
 import { MealItemsRepository, MealOptionsRepository, MealRepository, RoutineRepository } from '../sequelize';
-import { CreateRoutineService, GetRoutinesService, GetRoutineService } from '../services';
+import { CreateRoutineService, GetRoutinesService, GetRoutineService, DeleteRoutineService } from '../services';
 
 const routineRoutes = Router();
 
@@ -47,6 +48,17 @@ routineRoutes.post('/', validateSchema(createRoutineSchema, ESchemaType.BODY), (
     userRepository
   );
   const controller = new CreateRoutineController(service);
+  return controller.handle(req, res, next);
+});
+
+routineRoutes.delete('/:id', (req, res, next) => {
+  const service = new DeleteRoutineService(
+    routineRepository,
+    mealRepository,
+    mealOptionsRepository,
+    mealItemsRepository
+  );
+  const controller = new DeleteRoutineController(service);
   return controller.handle(req, res, next);
 });
 
