@@ -32,22 +32,21 @@ export abstract class Service implements IService {
     return conditions.where;
   }
 
-  protected buildIncludes(includes: string, modelAssociations: IModelAssociations): FindOptions {
+  protected buildIncludes(includes: string, modelAssociations: IModelAssociations): Includeable[] {
     const conditions: FindOptions = {};
+    conditions.include = [];
 
     if (!includes) {
-      return conditions;
+      return conditions.include;
     }
 
     const includesArray = includes.split(',');
-
-    conditions.include = [];
 
     const findInModelAssociations = (model: string) =>
       Object.keys(modelAssociations).find((modelAssociation) => modelAssociation === model);
 
     conditions.include = includesArray.filter((model) => <Includeable>findInModelAssociations(model));
 
-    return conditions;
+    return conditions.include;
   }
 }
