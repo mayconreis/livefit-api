@@ -2,6 +2,7 @@ import { CreateOptions, DestroyOptions, FindOptions, UpdateOptions } from 'seque
 import { Col, Fn, Literal, MakeNullishOptional } from 'sequelize/types/utils';
 import { Model } from 'sequelize-typescript';
 import { Attributes } from 'sequelize/types/model';
+import { IModelAssociations } from '@src/interfaces/IModelAssociations';
 
 export interface IBaseRepository<M extends Model> {
   delete(options: DestroyOptions): Promise<number>;
@@ -24,4 +25,6 @@ export interface IBaseRepository<M extends Model> {
     },
     conditions: UpdateOptions<Attributes<M>>
   ): Promise<[affectedCount: number]>;
+
+  getAssociations(): IModelAssociations;
 }

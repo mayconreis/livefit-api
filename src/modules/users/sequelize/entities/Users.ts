@@ -1,6 +1,7 @@
 import { BaseEntity, IBaseEntityAttributes } from '@src/common/BaseEntity';
-import { Column, DataType, Table } from 'sequelize-typescript';
+import { Column, DataType, HasMany, Table } from 'sequelize-typescript';
 import { EUserProfile } from '@src/shared/enums';
+import { Solicitations } from '@src/modules/solicitations/sequelize';
 
 export interface IUserAttributes extends IBaseEntityAttributes {
   fullName: string;
@@ -11,6 +12,7 @@ export interface IUserAttributes extends IBaseEntityAttributes {
   personalKey: string;
   createdAt?: Date;
   updatedAt?: Date;
+  solicitations: Solicitations[];
 }
 
 export type IUserCreationAttributes = Omit<IUserAttributes, 'id'>;
@@ -44,4 +46,7 @@ export class Users extends BaseEntity<IUserAttributes, IUserCreationAttributes> 
 
   @Column(DataType.DATE)
   updatedAt?: Date;
+
+  @HasMany(() => Solicitations)
+  solicitations!: Solicitations[];
 }
