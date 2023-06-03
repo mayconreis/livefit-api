@@ -15,13 +15,7 @@ export const requestLogger = (req: Request) => {
   Logger.Debug(`Request`, log);
 };
 
-export const errorLogger = (
-  code: number,
-  stack: string,
-  message: string,
-  req: Request,
-  cause?: object
-) => {
+export const errorLogger = (code: number, stack: string, message: string, req: Request, cause?: string) => {
   const log = <ILoggerError>{
     code,
     stack,
