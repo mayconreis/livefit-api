@@ -40,4 +40,33 @@ const createRoutineSchema = joi.object().keys({
     ),
 });
 
-export default createRoutineSchema;
+const updateRoutineSchema = joi.object().keys({
+  meals: joi
+    .array()
+    .min(1)
+    .max(3)
+    .required()
+    .items(
+      joi.object().keys({
+        period: joi
+          .string()
+          .trim()
+          .required()
+          .valid(...Object.values(EMealPeriod)),
+        time: joi.string().trim().required(),
+        mealItems: joi
+          .array()
+          .min(1)
+          .max(3)
+          .required()
+          .items(
+            joi.object().keys({
+              item: joi.string().trim().required(),
+              quantity: joi.string().trim().required(),
+            })
+          ),
+      })
+    ),
+});
+
+export { createRoutineSchema, updateRoutineSchema };

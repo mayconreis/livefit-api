@@ -1,17 +1,24 @@
 import { Router } from 'express';
 import {
   CreateRoutineController,
+  DeleteRoutineController,
   GetRoutineByPatientController,
   GetRoutineController,
   GetRoutinesController,
-  DeleteRoutineController,
+  UpdateRoutineController,
 } from '@src/modules/routines/controllers';
 import validateSchema from '@src/http/middlewares/joi/validateSchema';
-import createRoutineSchema from '@src/modules/routines/routineSchema';
+import { createRoutineSchema, updateRoutineSchema } from '@src/modules/routines/routineSchema';
 import { ESchemaType } from '@src/shared/enums';
 import { UserRepository } from '@src/modules/users/sequelize';
 import { MealItemsRepository, MealOptionsRepository, MealRepository, RoutineRepository } from '../sequelize';
-import { CreateRoutineService, GetRoutinesService, GetRoutineService, DeleteRoutineService } from '../services';
+import {
+  CreateRoutineService,
+  DeleteRoutineService,
+  GetRoutineService,
+  GetRoutinesService,
+  UpdateRoutineService,
+} from '../services';
 
 const routineRoutes = Router();
 
@@ -62,4 +69,14 @@ routineRoutes.delete('/:id', (req, res, next) => {
   return controller.handle(req, res, next);
 });
 
+routineRoutes.put('/:id', validateSchema(updateRoutineSchema, ESchemaType.BODY), (req, res, next) => {
+  const service = new UpdateRoutineService(
+    routineRepository,
+    mealRepository,
+    mealOptionsRepository,
+    mealItemsRepository
+  );
+  const controller = new UpdateRoutineController(service);
+  return controller.handle(req, res, next);
+});
 export default routineRoutes;
