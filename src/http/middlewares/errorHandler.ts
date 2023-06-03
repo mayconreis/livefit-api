@@ -2,14 +2,13 @@ import { NextFunction, Request, Response } from 'express';
 import { INTERNAL_SERVER_ERROR, REQUEST_TIMEOUT } from 'http-status';
 import { InternalError, ResponseError } from '@src/common';
 import { TimeoutError } from 'sequelize';
-import { ErrorHelper } from '@src/helpers';
 import { errorLogger } from '@src/http/error/logger';
 
 const errorHandler = (error: Error, req: Request, res: Response, _next: NextFunction) => {
   const stack = error.stack ?? '';
   let message = 'Ops, ocorreu um erro inesperado, por favor tente novamente em instantes.';
   let code: number = INTERNAL_SERVER_ERROR;
-  let cause: object = {};
+  let cause = '';
 
   if (error instanceof ResponseError) {
     code = error.code;
@@ -22,7 +21,7 @@ const errorHandler = (error: Error, req: Request, res: Response, _next: NextFunc
   }
 
   if (error instanceof InternalError) {
-    cause = ErrorHelper.convertErrorToJson(error.cause);
+    cause = error.cause.message;
   }
 
   const { response } = new ResponseError(message, code);
